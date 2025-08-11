@@ -1,1 +1,0 @@
-// Ruta del archivo: /src/components/CalendarTable.jsx

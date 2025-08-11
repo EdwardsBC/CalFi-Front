@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Home.css';
 
 export default function Home() {
   // Estado para almacenar los gastos que devuelve el backend
