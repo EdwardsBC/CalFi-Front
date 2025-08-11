@@ -1,0 +1,77 @@
+/* ===========================
+   Archivo: /src/components/Navbar.css
+   Descripción:
+   Estilos para la barra de navegación fija superior.
+   Incluye diseño responsivo y botones de login/registro.
+=========================== */
+
+/* Barra de navegación principal */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Encima del contenido principal */
+  width: 100%;
+  background-color: #20232a; /* Color oscuro tipo React */
+  color: white;
+  display: flex;
+  justify-content: center; /* Centrado del contenedor interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor interno para limitar el ancho */
+.navbar-content {
+  width: 100%;
+  max-width: 1280px; /* Ancho máximo para evitar que se estire demasiado */
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+/* Contenedor de botones de la parte derecha */
+.navbar-right {
+  display: flex;
+  flex-wrap: wrap; /* Permite ajuste en pantallas pequeñas */
+  justify-content: flex-end;
+}
+
+/* Botones dentro del navbar */
+.navbar-right button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #20232a; /* Texto oscuro */
+  transition: background-color 0.3s;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 600px) {
+  .navbar-right {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+}
+
+/* Botón de inicio de sesión */
+.login-btn {
+  background-color: #61dafb; /* Azul React */
+}
+
+.login-btn:hover {
+  background-color: #21a1f1;
+}
+
+/* Botón de registro */
+.register-btn {
+  background-color: #ffd93b; /* Amarillo vibrante */
+}
+
+.register-btn:hover {
+  background-color: #f5c000;
+}

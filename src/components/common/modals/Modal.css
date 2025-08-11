@@ -1,30 +1,37 @@
-/* Modal Overlay */
+/* ===========================
+   Archivo: /src/components/Modal.css
+   Descripción:
+   Estilos para el modal genérico utilizado en la aplicación.
+   Incluye overlay, contenedor, botón de cierre, mensajes y formulario.
+=========================== */
+
+/* Fondo semitransparente que cubre toda la pantalla */
 .modal-overlay {
-  position: fixed;
+  position: fixed; /* Se mantiene fijo en la pantalla */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
+  background-color: rgba(0, 0, 0, 0.4); /* Oscurece el fondo */
+  display: flex; /* Centrado del modal */
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 2000; /* Encima de casi todo el contenido */
 }
 
-/* Modal Container */
+/* Contenedor principal del modal */
 .modal {
   background-color: #fff;
   padding: 2rem;
   border-radius: 12px;
   width: 350px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  position: relative;
+  position: relative; /* Necesario para posicionar el botón de cierre */
 }
 
-/* Close Button */
+/* Botón de cierre (X) */
 .close-button {
-  position: absolute;
+  position: absolute; /* Ubicado respecto al modal */
   top: 10px;
   right: 10px;
   background-color: black;
@@ -33,44 +40,47 @@
   font-weight: bold;
   font-size: 1.2rem;
   cursor: pointer;
-  border-radius: 6px; /* Borde ligeramente redondeado */
+  border-radius: 6px; /* Borde redondeado */
   width: 32px;
   height: 32px;
-  display: flex;
+  display: flex; /* Centrado del icono */
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s, transform 0.2s;
 }
 
+/* Mensaje dentro del modal, con estilo de alerta/información */
 .modal-message {
   margin-top: 10px;
   font-size: 0.9rem;
   color: #333;
   background-color: #f2f2f2;
   padding: 0.6rem;
-  border-left: 4px solid #61dafb;
+  border-left: 4px solid #61dafb; /* Indicador visual */
   border-radius: 6px;
 }
 
+/* Efecto hover en el botón de cierre */
 .close-button:hover {
   background-color: #333;
   transform: scale(1.05);
 }
 
-
-/* Form */
+/* Estilos para el formulario dentro del modal */
 .modal form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 12px; /* Espaciado entre inputs */
 }
 
+/* Campos de entrada */
 .modal input {
   padding: 0.7rem;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
 
+/* Botón de envío */
 .modal button[type="submit"] {
   background-color: #61dafb;
   color: #20232a;
@@ -81,6 +91,7 @@
   cursor: pointer;
 }
 
+/* Hover en botón de envío */
 .modal button[type="submit"]:hover {
   background-color: #21a1f1;
 }

@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Home() {
+  // Estado para almacenar los gastos que devuelve el backend
   const [expenses, setExpenses] = useState([]);
 
+  // useEffect se ejecuta una sola vez al montar el componente
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/expenses`)
-      .then(res => setExpenses(res.data))
-      .catch(err => console.error(err));
+    axios.get(`${import.meta.env.VITE_API_URL}/expenses`) // Llamada GET al backend usando variable de entorno
+      .then(res => setExpenses(res.data)) // Guardamos los datos en el estado
+      .catch(err => console.error(err)); // Manejamos errores por consola
   }, []);
 
   return (
@@ -22,6 +24,7 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
+          {/* Iteramos sobre el array de gastos y renderizamos cada fila */}
           {expenses.map(e => (
             <tr key={e.id}>
               <td>{e.date}</td>
