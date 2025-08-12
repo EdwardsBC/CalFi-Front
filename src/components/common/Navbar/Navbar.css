@@ -1,22 +1,20 @@
-
 /* Barra de navegación principal */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; /* Encima del contenido principal */
+  z-index: 1000;
   width: 100%;
-  background-color: #20232a; /* Color oscuro tipo React */
+  background-color: #20232a;
   color: white;
   display: flex;
-  justify-content: center; /* Centrado del contenedor interno */
+  justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor interno para limitar el ancho */
 .navbar-content {
   width: 100%;
-  max-width: 1280px; /* Ancho máximo para evitar que se estire demasiado */
+  max-width: 1280px;
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -24,14 +22,22 @@
   padding: 0 1.5rem;
 }
 
-/* Contenedor de botones de la parte derecha */
 .navbar-right {
   display: flex;
-  flex-wrap: wrap; /* Permite ajuste en pantallas pequeñas */
+  flex-wrap: wrap;
   justify-content: flex-end;
 }
 
-/* Botones dentro del navbar */
+.user-section {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
 .navbar-right button {
   border: none;
   padding: 8px 14px;
@@ -39,11 +45,10 @@
   font-weight: bold;
   cursor: pointer;
   margin-left: 10px;
-  color: #20232a; /* Texto oscuro */
+  color: #20232a;
   transition: background-color 0.3s;
 }
 
-/* Adaptación para pantallas pequeñas */
 @media (max-width: 600px) {
   .navbar-right {
     flex-direction: column;
@@ -54,7 +59,7 @@
 
 /* Botón de inicio de sesión */
 .login-btn {
-  background-color: #61dafb; /* Azul React */
+  background-color: #61dafb;
 }
 
 .login-btn:hover {
@@ -63,9 +68,19 @@
 
 /* Botón de registro */
 .register-btn {
-  background-color: #ffd93b; /* Amarillo vibrante */
+  background-color: #ffd93b;
 }
 
 .register-btn:hover {
   background-color: #f5c000;
+}
+
+/* Botón de cerrar sesión */
+.logout-btn {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #e63946;
 }

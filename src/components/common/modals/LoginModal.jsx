@@ -21,11 +21,10 @@ function LoginModal({ onClose }) {
 
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
-
+        localStorage.setItem('user', JSON.stringify(response.data.user)); // Guardamos el usuario
         setMensaje('Inicio de sesión exitoso.');
-
         onClose();
-
+        window.dispatchEvent(new Event('storage')); // Dispara evento para actualizar navbar
       } else {
         setMensaje(response.data.message);
       }
