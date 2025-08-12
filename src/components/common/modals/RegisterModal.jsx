@@ -32,11 +32,11 @@ const RegisterModal = ({ onClose }) => {
         setStep('verify');
         setMessage('✅ Código enviado al correo. Revisa tu bandeja de entrada.');
       } else {
-        setMessage(`❌ ${res.data.error || 'Error al registrar.'}`);
+        setMessage(`❌ ${res.data.message || 'Error al registrar.'}`);
       }
     } catch (error) {
       console.error(error);
-      setMessage('❌ Error en el servidor. Intenta más tarde.');
+      setMessage(`❌ ${error.response?.data?.message || 'Error en el servidor. Intenta más tarde.'}`);
     }
   };
 
