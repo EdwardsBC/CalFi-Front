@@ -1,34 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import LoginModal from '../modals/LoginModal';
 import RegisterModal from '../modals/RegisterModal';
+import { useAuth } from '../../../context/AuthContext';
 
 function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-
-    const handleStorageChange = () => {
-      const updatedUser = localStorage.getItem('user');
-      setUser(updatedUser ? JSON.parse(updatedUser) : null);
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('token');
-      await fetch('http://localhost:3001/api/auth/logout', {
+      await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,11 +24,8 @@ function Navbar() {
     } catch (error) {
       console.error('Error al cerrar sesión en el servidor:', error);
     }
-
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
-    window.dispatchEvent(new Event('storage'));
+    logout();
+    navigate('/');
   };
 
   return (
@@ -50,24 +33,20 @@ function Navbar() {
       <nav className="navbar">
         <div className="navbar-content">
           <div className="navbar-left">
-            <h2>Cale-Fin</h2>
+            <Link to="/" className="navbar-brand">Cale-Fin</Link>
           </div>
           <div className="navbar-right">
             {user ? (
               <div className="user-section">
-                <span className="user-name">Hola, {user.name}</span>
+                <span className="user-name">Hola, {user.nombre || user.name}</span>
                 <button className="logout-btn" onClick={handleLogout}>
                   Cerrar sesión
                 </button>
               </div>
             ) : (
               <>
-                <button className="login-btn" onClick={() => setShowLogin(true)}>
-                  Login
-                </button>
-                <button className="register-btn" onClick={() => setShowRegister(true)}>
-                  Register
-                </button>
+                <button className="login-btn" onClick={() => setShowLogin(true)}>Login</button>
+                <button className="register-btn" onClick={() => setShowRegister(true)}>Register</button>
               </>
             )}
           </div>

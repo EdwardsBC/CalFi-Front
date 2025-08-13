@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = useCallback(() => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
   }, []);
 
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/profile`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +36,8 @@ export const AuthProvider = ({ children }) => {
       if (!res.ok) throw new Error(`Error ${res.status}`);
 
       const data = await res.json();
-      setUser((prev) => (JSON.stringify(prev) !== JSON.stringify(data) ? data : prev));
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
     } catch (error) {
       console.error("Error validando token:", error);
       logout();
@@ -45,16 +47,21 @@ export const AuthProvider = ({ children }) => {
   }, [logout]);
 
   useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
     fetchProfile();
   }, [fetchProfile]);
 
   const login = (token, userData) => {
-    localStorage.setItem("token", token);
+    if (token) localStorage.setItem("token", token);
+    if (userData) localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, fetchProfile }}>
       {children}
     </AuthContext.Provider>
   );

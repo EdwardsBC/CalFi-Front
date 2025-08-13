@@ -12,6 +12,15 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.navbar-logo {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-logo:hover {
+  text-decoration: underline;
+}
+
 .navbar-content {
   width: 100%;
   max-width: 1280px;

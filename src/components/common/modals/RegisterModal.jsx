@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './Modal.css';
 import axios from 'axios';
@@ -24,9 +23,8 @@ const RegisterModal = ({ onClose }) => {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
         nombre: username,
         correo: email,
-        password: password
+        password
       });
-      console.log(res);
 
       if (res.data.success) {
         setStep('verify');
@@ -50,10 +48,16 @@ const RegisterModal = ({ onClose }) => {
       });
 
       if (res.data.success) {
-        setMessage('✅ Registro completo. Redirigiendo...');
+        // Guardar token y usuario directamente
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+
+        setMessage('✅ Registro completado. Redirigiendo...');
+        window.dispatchEvent(new Event('storage')); // Actualiza navbar
+
         setTimeout(() => {
-          window.location.href = '/schedule'; 
-        }, 2000);
+          window.location.href = '/schedule';
+        }, 1000);
       } else {
         setMessage(`❌ ${res.data.error || 'Código incorrecto'}`);
       }
@@ -67,6 +71,7 @@ const RegisterModal = ({ onClose }) => {
     <div className="modal-overlay">
       <div className="modal">
         <button className="close-button" onClick={onClose}>X</button>
+
         {step === 'register' ? (
           <>
             <h2>Crear cuenta</h2>

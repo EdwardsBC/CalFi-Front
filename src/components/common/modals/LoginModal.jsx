@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
 import './Modal.css';
 import axios from 'axios';
+import { useAuth } from '../../../context/AuthContext';
 
 function LoginModal({ onClose }) {
+  const { login } = useAuth();
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [mensaje, setMensaje] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/login`,
-        {
-          correo,
-          password,
-        }
+        { correo, password }
       );
 
       if (response.data.success) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user)); // Guardamos el usuario
+        const { token, user } = response.data;
+        login(token, user);
         setMensaje('Inicio de sesión exitoso.');
         onClose();
-        window.dispatchEvent(new Event('storage')); // Dispara evento para actualizar navbar
       } else {
         setMensaje(response.data.message);
       }
@@ -36,13 +33,9 @@ function LoginModal({ onClose }) {
   return (
     <div className="modal-overlay">
       <div className="modal">
-        
         <button className="close-button" onClick={onClose}>X</button>
-        
         <h2>Iniciar sesión</h2>
-
         <form onSubmit={handleLogin}>
-
           <input
             type="email"
             placeholder="Correo"
@@ -50,7 +43,6 @@ function LoginModal({ onClose }) {
             onChange={(e) => setCorreo(e.target.value)}
             required
           />
-
           <input
             type="password"
             placeholder="Contraseña"
@@ -58,10 +50,8 @@ function LoginModal({ onClose }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-
           <button type="submit">Login</button>
         </form>
-
         {mensaje && <p>{mensaje}</p>}
       </div>
     </div>
