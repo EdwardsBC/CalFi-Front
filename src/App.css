@@ -1,10 +1,10 @@
 /* Contenedor raíz con un ancho máximo y márgenes centrados */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-top: 80px; /* Deja espacio para el navbar fijo */
-  padding-left: 2rem;
-  padding-right: 2rem;
+  width: 100%;       /* ocupa todo el ancho */
+  max-width: none;   /* elimina el límite */
+  margin: 0;         /* elimina margen centrado */
+  padding-left: 1rem; /* o 0 si quieres pegado al borde */
+  padding-right: 1rem;
 }
 
 /* Estilos para el logo */

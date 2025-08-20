@@ -1,56 +1,86 @@
+/* index.css - estilos globales y configuración de layout */
+
 /* Variables y estilos globales */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --bg: #242424;            /* fondo oscuro por defecto */
+  --text: rgba(255, 255, 255, 0.92);
+  --accent: #646cff;
+  --btn-bg: #1a1a1a;
+  --btn-radius: 8px;
+
+  font-family: system-ui, Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
+
+/* Reset / base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Body: ocupar todo el ancho con un pequeño margen */
+body {
+  margin: 16px 0;               /* margen alrededor (ajústalo si quieres más/menos) */
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Si quieres forzar que el contenido principal se extienda de lado a lado,
+   asegúrate que el contenedor principal no tenga max-width ni margin:auto.
+   Por ejemplo, si usas .home-wrapper u otro contenedor, que tenga width:100%. */
 
 /* Links con hover personalizado */
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--accent);
+  text-decoration: none;
 }
 a:hover {
   color: #535bf2;
 }
 
-/* Reseteo y centrado del body */
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
+/* Titulares */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.4rem;
+  line-height: 1.05;
+  margin: 0 0 16px 0;
 }
 
 /* Estilos para botones */
 button {
-  border-radius: 8px;
+  border-radius: var(--btn-radius);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--btn-bg);
+  color: var(--text);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, transform 0.06s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+button:active {
+  transform: translateY(0);
 }
 button:focus,
 button:focus-visible {
@@ -60,13 +90,26 @@ button:focus-visible {
 /* Estilos adaptados para tema claro */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --bg: #ffffff;
+    --text: #213547;
+    --btn-bg: #f9f9f9;
   }
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+
+/* Utilidades recomendadas (puedes usarlas en App / Home) */
+.container-full {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-centered {
+  width: 100%;
+  max-width: 1280px; /* si quieres centrar con límite, cambia este valor */
+  margin: 0 auto;
+  padding: 0 16px;
 }
